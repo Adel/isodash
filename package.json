@@ -1,0 +1,34 @@
+{
+  "name": "isodash",
+  "version": "0.1.0",
+  "description": "An isomorphic js dashboard framework.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp dev --gulpfile ./build-scripts/gulpfile.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manland/isodash.git"
+  },
+  "keywords": [
+    "dashboard",
+    "angular2"
+  ],
+  "author": "Romain Maneschi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manland/isodash/issues"
+  },
+  "homepage": "https://github.com/manland/isodash#readme",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-cached": "^1.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-remember": "^0.3.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.12.1",
+    "run-sequence": "^1.1.5"
+  }
+}
