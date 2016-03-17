@@ -21,29 +21,33 @@ gulp.task(TASK_DEV_CLEAN, () => {
 });
 
 gulp.task(TASK_DEV_TYPESCRIPT_CLIENT, () => {
-    var tsResult = gulp.src(config.client.ts.files)
-        .pipe(cache('scripts'))
+    var tsProject = ts.createProject('tsconfig.json');
+
+    var tsResult = tsProject.src(config.client.ts.files)
+        .pipe(cache(TASK_DEV_TYPESCRIPT_CLIENT))
         .pipe(sourcemaps.init())
-        .pipe(ts(config.client.ts.options));
+        .pipe(ts(tsProject));
 
     return tsResult.js
-        .pipe(remember('scripts'))
-        .pipe(concat('app.js'))
+        .pipe(remember(TASK_DEV_TYPESCRIPT_CLIENT))
+        .pipe(concat('index.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.client.ts.dest));
 });
 
 gulp.task(TASK_DEV_TYPESCRIPT_SERVER, () => {
-    var tsResult = gulp.src(config.server.ts.files)
-        .pipe(cache('scripts'))
+    var tsProject = ts.createProject('tsconfig.json');
+
+    var tsResult = tsProject.src(config.server.ts.files)
+        .pipe(cache(TASK_DEV_TYPESCRIPT_SERVER))
         .pipe(sourcemaps.init())
-        .pipe(ts(config.server.ts.options));
+        .pipe(ts(tsProject));
 
     return tsResult.js
-        .pipe(remember('scripts'))
-        .pipe(concat('app.js'))
+        .pipe(remember(TASK_DEV_TYPESCRIPT_SERVER))
+        //.pipe(concat('index.js'))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(config.client.ts.dest));
+        .pipe(gulp.dest(config.server.ts.dest));
 });
 
 gulp.task(TASK_DEV_WATCH, () => {
