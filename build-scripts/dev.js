@@ -39,12 +39,12 @@ gulp.task(TASK_DEV_TYPESCRIPT_SERVER, () => {
     var tsProject = ts.createProject('tsconfig.json');
 
     var tsResult = tsProject.src(config.server.ts.files)
-        .pipe(cache(TASK_DEV_TYPESCRIPT_SERVER))
+        //.pipe(cache(TASK_DEV_TYPESCRIPT_SERVER))
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject));
 
     return tsResult.js
-        .pipe(remember(TASK_DEV_TYPESCRIPT_SERVER))
+        //.pipe(remember(TASK_DEV_TYPESCRIPT_SERVER))
         //.pipe(concat('index.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.server.ts.dest));

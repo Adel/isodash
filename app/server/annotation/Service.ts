@@ -1,16 +1,15 @@
 import {Injector} from "angular2/core";
 import {provide} from "angular2/core";
-import {inject} from "angular2/testing";
 import {Type} from "angular2/core";
 
 let clazz: Array<any> = [];
 let injector;
 
-export interface Application {
-    start(): any;
+export abstract class Application {
+    abstract start(): any;
 }
 
-export function start(application: Application) {
+export function start(application: typeof Application) {
     clazz.push(application);
     injector = Injector.resolveAndCreate(clazz);
     injector.get(application).start();

@@ -1,5 +1,5 @@
 export class Test {
     method() {
-        console.log('test');
+        console.log('test 2');
     }
 }
