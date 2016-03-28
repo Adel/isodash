@@ -10,11 +10,13 @@ var config = require('./config');
 
 var TASK_DEV_CLEAN = 'dev.clean';
 var TASK_DEV_TYPESCRIPT_CLIENT = 'dev.typescript.client';
+var TASK_DEV_ASSETS_CLIENT = 'dev.assets.client';
+var TASK_DEV_VENDORS_CLIENT = 'dev.vendors.client';
 var TASK_DEV_TYPESCRIPT_SERVER = 'dev.typescript.server';
 var TASK_DEV_WATCH = 'dev.watch';
 
 module.exports.piorTasks = [TASK_DEV_CLEAN];
-module.exports.tasks = [TASK_DEV_TYPESCRIPT_CLIENT, TASK_DEV_TYPESCRIPT_SERVER, TASK_DEV_WATCH];
+module.exports.tasks = [TASK_DEV_TYPESCRIPT_CLIENT, TASK_DEV_ASSETS_CLIENT, TASK_DEV_VENDORS_CLIENT, TASK_DEV_TYPESCRIPT_SERVER, TASK_DEV_WATCH];
 
 gulp.task(TASK_DEV_CLEAN, () => {
     return del(config.server.ts.dest, {force: true});
@@ -24,15 +26,27 @@ gulp.task(TASK_DEV_TYPESCRIPT_CLIENT, () => {
     var tsProject = ts.createProject('tsconfig.json');
 
     var tsResult = tsProject.src(config.client.ts.files)
-        .pipe(cache(TASK_DEV_TYPESCRIPT_CLIENT))
+        //.pipe(cache(TASK_DEV_TYPESCRIPT_CLIENT))
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject));
 
     return tsResult.js
-        .pipe(remember(TASK_DEV_TYPESCRIPT_CLIENT))
-        .pipe(concat('index.js'))
+        //.pipe(remember(TASK_DEV_TYPESCRIPT_CLIENT))
+        //.pipe(concat('index.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.client.ts.dest));
+});
+
+gulp.task(TASK_DEV_ASSETS_CLIENT, () => {
+    return gulp.src(config.client.assets.files)
+        .pipe(gulp.dest(config.client.assets.dest));
+});
+
+gulp.task(TASK_DEV_VENDORS_CLIENT, () => {
+    config.client.vendors.forEach((conf) => {
+        gulp.src(conf.files, {base: conf.base})
+            .pipe(gulp.dest(conf.dest));
+    });
 });
 
 gulp.task(TASK_DEV_TYPESCRIPT_SERVER, () => {

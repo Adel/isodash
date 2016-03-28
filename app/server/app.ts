@@ -1,11 +1,10 @@
-/// <reference path="../../node_modules/zone.js/dist/zone.js.d.ts" />
-//TODO remove zone.d.ts manually inclusion when bug is fixed in angular
-
 import 'reflect-metadata';
 
-import {Inject, Injectable} from "angular2/core";
+import {Inject} from "angular2/core";
 import {Application, start} from "./annotation/Service";
-import {MySrv} from "./MySrv";
+import {Fetcher} from "./fetcher/Fetcher";
+import {FetcherToken} from "./fetcher/Fetcher";
+import {StaticServer} from "./service/StaticServer";
 
 /********
  * load services
@@ -23,15 +22,14 @@ services.forEach((s: string) => {
 /********
  * bootstrap app
  ********/
-@Injectable()
-export class App extends Application {
+export class App implements Application {
 
-    constructor(@Inject(MySrv) private services: Array<MySrv>) {
-        super();
+    constructor(@Inject(FetcherToken) private fetchers: Array<Fetcher>, @Inject(StaticServer) private staticServer: StaticServer) {
     }
 
     start() {
-        this.services.forEach((s: MySrv) => s.methode());
+        this.staticServer.start();
+        this.fetchers.forEach((f: Fetcher) => f.start());
     }
 }
 

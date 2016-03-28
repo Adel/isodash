@@ -1,9 +1,17 @@
-/// <reference path="../../node_modules/zone.js/dist/zone.js.d.ts" />
+import {bootstrap} from "angular2/bootstrap";
+import {Component} from "angular2/core";
+import {Server} from "./service/Server";
 
-import {Test} from './test';
-
+@Component({
+    selector: 'my-app',
+    template: `<div style="background: red; width: 50px; height: 50px; display: inline-block"></div>`
+})
 export class App {
-    method() {
-        new Test().method();
+
+    constructor(private server: Server) {
+
     }
+
 }
+
+bootstrap(App, [Server]);

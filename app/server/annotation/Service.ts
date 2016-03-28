@@ -1,24 +1,26 @@
-import {Injector} from "angular2/core";
-import {provide} from "angular2/core";
-import {Type} from "angular2/core";
+import {Injector, provide, Type} from "angular2/core";
 
 let clazz: Array<any> = [];
-let injector;
+let injector: Injector;
 
-export abstract class Application {
-    abstract start(): any;
+export interface Application {
+    start(): any;
 }
 
-export function start(application: typeof Application) {
+export function start(application: Application) {
     clazz.push(application);
     injector = Injector.resolveAndCreate(clazz);
     injector.get(application).start();
 }
 
-export function Service({token, multi}:{token?:Type, multi?: boolean}) {
+export interface ServiceParams {
+    token: Type;
+}
+
+export function Service(serviceParams?: ServiceParams) {
     return (target: any) => {
-        if(multi && token) {
-            clazz.push(provide(token, {useClass: target, multi: true}));
+        if(serviceParams) {
+            clazz.push(provide(serviceParams.token, {useClass: target, multi: true}));
         } else {
             clazz.push(target);
         }
