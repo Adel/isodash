@@ -1,5 +1,16 @@
+export enum Type {
+    String,
+    Number,
+    Boolean,
+    Date,
+    ArrayString,
+    ArrayNumber,
+    ArrayBoolean,
+    ArrayDate
+}
+
 export interface FetcherOutput {
-    [name: string]: string | number | boolean | Date | Array<string | number | boolean | Date>;
+    [name: string]: Type;
 }
 
 export interface FetcherMetaInfo {

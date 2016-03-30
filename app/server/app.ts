@@ -1,10 +1,9 @@
 import 'reflect-metadata';
 
-import {Inject} from "angular2/core";
+import {Inject, Injectable} from "angular2/core";
 import {Application, start} from "./annotation/Service";
-import {Fetcher} from "./fetcher/Fetcher";
-import {FetcherToken} from "./fetcher/Fetcher";
-import {StaticServer} from "./service/StaticServer";
+import {Fetcher, FetcherToken} from "./fetcher/Fetcher";
+import {StaticServer, Client} from "./service";
 
 /********
  * load services
@@ -22,9 +21,11 @@ services.forEach((s: string) => {
 /********
  * bootstrap app
  ********/
+@Injectable()
 export class App implements Application {
 
-    constructor(@Inject(FetcherToken) private fetchers: Array<Fetcher>, @Inject(StaticServer) private staticServer: StaticServer) {
+    constructor(@Inject(FetcherToken) private fetchers: Array<Fetcher>, private staticServer: StaticServer, private client: Client) {
+        client.fetchers = fetchers;
     }
 
     start() {

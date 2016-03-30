@@ -1,11 +1,15 @@
 import {Service} from "../annotation/Service";
 import {Server as WebSocketServer} from 'ws';
 import * as WebSocket from "ws";
+import {Fetcher} from "../fetcher/Fetcher";
+import {CommunicationEvent, Fetchers} from "../../shared/communication";
 
 @Service()
 export class Client {
 
     private wss: WebSocketServer;
+
+    public fetchers: Array<Fetcher> = [];
 
     constructor() {
         this.wss = new WebSocketServer({ port: 8080 });
@@ -17,13 +21,17 @@ export class Client {
             console.log('received: %s', message);
         });
 
-        ws.send('something');
+        this.sendTo(new Fetchers(this.fetchers.map((f: Fetcher) => f.getMetaInfo())), ws);
     }
 
-    send(data: Object) {
+    send(data: CommunicationEvent) {
         this.wss.clients.forEach((client: WebSocket) => {
             client.send(JSON.stringify(data));
         });
+    }
+
+    sendTo(data: CommunicationEvent, client: WebSocket) {
+        client.send(JSON.stringify(data));
     }
 
 }

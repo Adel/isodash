@@ -30,6 +30,7 @@ module.exports.client = {
     ],
     ts: {
         files: [
+            './app/shared/**/*.ts',
             './app/client/**/*.ts'
         ],
         dest: './build/'
@@ -42,6 +43,7 @@ module.exports.server = {
             './nodes_modules/es6-promise/dist/es6-promise.js',
             './nodes_modules/es6-shim/es6-shim.js',
             './nodes_modules/reflect-metadata/Reflect.ts',
+            './app/shared/**/*.ts',
             './app/server/**/*.ts'
         ],
         dest: './build/'
