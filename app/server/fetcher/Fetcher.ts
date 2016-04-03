@@ -1,25 +1,4 @@
-export enum Type {
-    String,
-    Number,
-    Boolean,
-    Date,
-    ArrayString,
-    ArrayNumber,
-    ArrayBoolean,
-    ArrayDate
-}
-
-export interface FetcherTypes {
-    [name: string]: Type;
-}
-
-export interface FetcherMetaInfo {
-    name: string;
-    description: string;
-    imageUrl: string;
-    options: FetcherTypes;
-    output: FetcherTypes;
-}
+import {PluginMetaInfo} from "../../shared/model/PluginMetaInfo";
 
 export interface FetcherFromConfig {
     type: string,
@@ -32,6 +11,6 @@ export class FetcherDIToken {
 }
 
 export interface Fetcher {
-    getMetaInfo(): FetcherMetaInfo;
+    getMetaInfo(): PluginMetaInfo;
     start(filledOptions: any): any;
 }
