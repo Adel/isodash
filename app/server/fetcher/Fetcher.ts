@@ -9,7 +9,7 @@ export enum Type {
     ArrayDate
 }
 
-export interface FetcherOutput {
+export interface FetcherTypes {
     [name: string]: Type;
 }
 
@@ -17,14 +17,21 @@ export interface FetcherMetaInfo {
     name: string;
     description: string;
     imageUrl: string;
-    output: FetcherOutput;
+    options: FetcherTypes;
+    output: FetcherTypes;
 }
 
-export class FetcherToken {
+export interface FetcherFromConfig {
+    type: string,
+    name: string,
+    options: any
+}
+
+export class FetcherDIToken {
 
 }
 
 export interface Fetcher {
     getMetaInfo(): FetcherMetaInfo;
-    start(): any;
+    start(filledOptions: any): any;
 }

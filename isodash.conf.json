@@ -1,0 +1,19 @@
+  {
+    "fetchers": ["../IDF/Test"],
+    "fetchersConfiguration": [
+      {
+        "name": "Test",
+        "options": {
+          "color": "red",
+          "url": "http://www.mocky.io/v2/56eea59312000099007b1c3c"
+        }
+      },
+      {
+        "name": "Test",
+        "options": {
+          "color": "green",
+          "url": "http://www.mocky.io/v2/56eea59312000099007b1c3c"
+        }
+      }
+    ]
+  }

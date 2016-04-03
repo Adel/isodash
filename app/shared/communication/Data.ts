@@ -1,5 +1,5 @@
 import {CommunicationEvent} from "./CommunicationEvent";
-import {FetcherOutput} from "../../server/fetcher/Fetcher";
+import {FetcherTypes} from "../../server/fetcher/Fetcher";
 
 export class Data implements CommunicationEvent {
     name = 'Data';

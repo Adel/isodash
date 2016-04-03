@@ -2,21 +2,10 @@ import 'reflect-metadata';
 
 import {Inject, Injectable} from "angular2/core";
 import {Application, start} from "./annotation/Service";
-import {Fetcher, FetcherToken} from "./fetcher/Fetcher";
-import {StaticServer, Client} from "./service";
-
-/********
- * load services
- ********/
-if(!process.argv[2]) {
-    console.error('Call me with services in params (e.g. `node server/app.js "service1:service2..."`)');
-    process.exit(1);
-}
-
-const services = process.argv[2].split(':');
-services.forEach((s: string) => {
-    require(s);
-});
+import {Fetcher, FetcherDIToken, FetcherFromConfig} from "./fetcher/Fetcher";
+import {StaticServer, Client, DynamicFetcherLoader} from "./service";
+import * as isodashConf from "../../../isodash.conf.json";
+import {CheckFetcherOption} from "./service/CheckFetcherOption";
 
 /********
  * bootstrap app
@@ -24,14 +13,31 @@ services.forEach((s: string) => {
 @Injectable()
 export class App implements Application {
 
-    constructor(@Inject(FetcherToken) private fetchers: Array<Fetcher>, private staticServer: StaticServer, private client: Client) {
+    constructor(@Inject(FetcherDIToken) private fetchers: Array<Fetcher>, private staticServer: StaticServer, private client: Client, private checkFetcherOption: CheckFetcherOption) {
         client.fetchers = fetchers;
     }
 
     start() {
         this.staticServer.start();
-        this.fetchers.forEach((f: Fetcher) => f.start());
+        const errors: Array<string> = [];
+        isodashConf.fetchersConfiguration.forEach((fetcherConf: FetcherFromConfig) => {
+            const fetcher = this.fetchers.find((fetcher: Fetcher) => {
+                return fetcherConf.name === fetcher.getMetaInfo().name;
+            });
+            if(fetcher) {
+                const errorsFromConfig = this.checkFetcherOption.check(fetcher, fetcherConf);
+                if(errorsFromConfig.length === 0) {
+                    fetcher.start(fetcherConf.options);
+                } else {
+                    errors.push(...errorsFromConfig);
+                }
+            } else {
+                errors.push(`Fetcher not found ${fetcherConf.name}! Please correct its name in isodash.conf.json`);
+            }
+        });
+        errors.forEach((error) => console.error(error));
     }
 }
 
+new DynamicFetcherLoader().start(isodashConf.fetchers);
 start(<Application>App);

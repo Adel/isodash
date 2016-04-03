@@ -1,11 +1,11 @@
 import {Service} from "../annotation/Service";
 import {Http} from "../service/Http";
-import {Fetcher, FetcherToken, FetcherMetaInfo, Type} from "../fetcher/Fetcher";
+import {Fetcher, FetcherDIToken, FetcherMetaInfo, Type} from "../fetcher/Fetcher";
 import * as http from 'http';
 import {Client} from "../service/Client";
 import {Data} from "../../shared/communication/Data";
 
-@Service({token: FetcherToken})
+@Service({token: FetcherDIToken})
 export class Test implements Fetcher {
 
     private static NAME = 'Test';
@@ -18,18 +18,23 @@ export class Test implements Fetcher {
             name: Test.NAME,
             description: 'This is a test.',
             imageUrl: '',
+            options: {
+                color: Type.String,
+                url: Type.String
+            },
             output: {
                 date: Type.Date,
-                value: Type.Number
+                value: Type.Number,
+                color: Type.String
             }
         };
     }
 
-    start() {
+    start(filledOptions: any) {
         setInterval(() => {
             console.log('IDF/Test :: START REQUEST');
-            this.http.get('http://www.mocky.io/v2/56eea59312000099007b1c3c', (error: any, response: http.IncomingMessage, body: any) => {
-                this.client.send(new Data(Test.NAME, {date: new Date(), value: JSON.parse(body)[0].value}));
+            this.http.get(filledOptions.url, (error: any, response: http.IncomingMessage, body: any) => {
+                this.client.send(new Data(Test.NAME, {date: new Date(), value: JSON.parse(body)[0].value, color: filledOptions.color}));
             });
         }, 5000);
     }
