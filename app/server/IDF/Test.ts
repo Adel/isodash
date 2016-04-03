@@ -1,9 +1,10 @@
 import {Service} from "../annotation/Service";
 import {Http} from "../service/Http";
-import {Fetcher, FetcherDIToken, FetcherMetaInfo, Type} from "../fetcher/Fetcher";
+import {Fetcher, FetcherDIToken} from "../fetcher/Fetcher";
 import * as http from 'http';
 import {Client} from "../service/Client";
 import {Data} from "../../shared/communication/Data";
+import {PluginMetaInfo, Type} from "../../shared/model/PluginMetaInfo";
 
 @Service({token: FetcherDIToken})
 export class Test implements Fetcher {
@@ -13,7 +14,7 @@ export class Test implements Fetcher {
     constructor(private http: Http, private client: Client) {
     }
 
-    getMetaInfo(): FetcherMetaInfo {
+    getMetaInfo(): PluginMetaInfo {
         return {
             name: Test.NAME,
             description: 'This is a test.',

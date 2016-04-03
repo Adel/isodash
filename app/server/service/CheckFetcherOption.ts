@@ -1,5 +1,6 @@
 import {Service} from "../annotation/Service";
-import {Fetcher, FetcherFromConfig, Type} from "../fetcher/Fetcher";
+import {Fetcher, FetcherFromConfig} from "../fetcher/Fetcher";
+import {Type} from "../../shared/model/PluginMetaInfo";
 
 @Service()
 export class CheckFetcherOption {

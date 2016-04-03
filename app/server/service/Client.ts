@@ -2,7 +2,7 @@ import {Service} from "../annotation/Service";
 import {Server as WebSocketServer} from 'ws';
 import * as WebSocket from "ws";
 import {Fetcher} from "../fetcher/Fetcher";
-import {CommunicationEvent, Fetchers} from "../../shared/communication";
+import {CommunicationEvent, IsoDashInit} from "../../shared/communication";
 
 @Service()
 export class Client {
@@ -21,7 +21,7 @@ export class Client {
             console.log('received: %s', message);
         });
 
-        this.sendTo(new Fetchers(this.fetchers.map((f: Fetcher) => f.getMetaInfo())), ws);
+        this.sendTo(new IsoDashInit(this.fetchers.map((f: Fetcher) => f.getMetaInfo())), ws);
     }
 
     send(data: CommunicationEvent) {
