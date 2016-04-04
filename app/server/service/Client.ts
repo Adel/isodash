@@ -10,6 +10,7 @@ export class Client {
     private wss: WebSocketServer;
 
     public fetchers: Array<Fetcher> = [];
+    public visualizersClass: Array<string> = [];
 
     constructor() {
         this.wss = new WebSocketServer({ port: 8080 });
@@ -21,7 +22,7 @@ export class Client {
             console.log('received: %s', message);
         });
 
-        this.sendTo(new IsoDashInit(this.fetchers.map((f: Fetcher) => f.getMetaInfo())), ws);
+        this.sendTo(new IsoDashInit(this.fetchers.map((f: Fetcher) => f.getMetaInfo()), this.visualizersClass), ws);
     }
 
     send(data: CommunicationEvent) {

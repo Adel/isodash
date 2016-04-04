@@ -1,4 +1,9 @@
-import {PluginMetaInfo} from "../../shared/model/PluginMetaInfo";
+import {PluginMetaInfo, PluginTypes} from "../../shared/model/PluginMetaInfo";
+export {Type} from "../../shared/model/PluginMetaInfo";
+
+export interface FetcherMetaInfo extends PluginMetaInfo {
+    output: PluginTypes;
+}
 
 export interface FetcherFromConfig {
     type: string,
@@ -11,6 +16,6 @@ export class FetcherDIToken {
 }
 
 export interface Fetcher {
-    getMetaInfo(): PluginMetaInfo;
+    getMetaInfo(): FetcherMetaInfo;
     start(filledOptions: any): any;
 }

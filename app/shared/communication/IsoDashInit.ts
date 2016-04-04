@@ -1,10 +1,9 @@
 import {CommunicationEvent} from "./CommunicationEvent";
-import {Visualizer} from "../../client/service/visualizer/Visualizer";
-import {PluginMetaInfo} from "../model/PluginMetaInfo";
+import {FetcherMetaInfo} from "../../server/fetcher/Fetcher";
 
 export class IsoDashInit implements CommunicationEvent {
     name = 'IsoDashInit';
 
-    constructor(public fetchers: Array<PluginMetaInfo>, public visualizers: Array<Visualizer>) {
+    constructor(public fetchers: Array<FetcherMetaInfo>, public visualizers: Array<string>) {
     }
 }
