@@ -27,6 +27,8 @@ Isodash permit to build dashboards. Its based on Fetchers (to get data) and Visu
   * [ ] If a dashboard is in password mode (setting in conf server side), to edit it need to fill a password
   * [ ] When selecting an url without dashboard -> create it and user can configure it
   * [ ] If a no passworded dashboard is not seen during 48H (can ba a setting) delete it
+ 
+* [ ] Install it to raspberry with restart auto
 
 ## Version 2
 
@@ -48,12 +50,17 @@ Isodash permit to build dashboards. Its based on Fetchers (to get data) and Visu
   * [ ] piwik
   * [ ] elastic-search (ELK)
   * [ ] twitter
+  * [ ] Facebook
   * [ ] rss
   * [ ] picture of a local directory
   * [ ] Coffee machine _(reserved by sam)_
   * [ ] Service rest (can be used internally to get plots, products, cultural-practices...)
+  * [ ] Jenkins build status
+  * [ ] Trade (cac40) of soybean, corn, wheat, coffee...
 
 ## Version 3
+
+* DB to save data
 
 * Plugin management
   * [ ] Fetchers can be installed with npm
