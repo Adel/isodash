@@ -1,6 +1,11 @@
-import {PluginMetaInfo} from "../../../shared/model/PluginMetaInfo";
+import {PluginMetaInfo, PluginTypes} from "../../../shared/model/PluginMetaInfo";
+export {Type} from "../../../shared/model/PluginMetaInfo";
+
+export interface VisualizerMetaInfo extends PluginMetaInfo {
+    input: PluginTypes;
+}
 
 export interface Visualizer {
-    getMetaInfo(): PluginMetaInfo;
+    getMetaInfo(): VisualizerMetaInfo;
     start(filledOptions: any): any;
 }

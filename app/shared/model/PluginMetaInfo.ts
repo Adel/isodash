@@ -18,5 +18,4 @@ export interface PluginMetaInfo {
     description: string;
     imageUrl: string;
     options: PluginTypes;
-    output: PluginTypes;
 }

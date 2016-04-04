@@ -38,11 +38,23 @@ export class StaticServer {
             fs.readFile(path.resolve(__dirname, `../../client${filePath}`), (error, content) => {
                 if (error) {
                     if(error.code == 'ENOENT') {
-                        console.error('404 NOT FOUND', path.resolve(__dirname, `../../client${filePath}`));
-                        response.writeHead(404);
-                        response.end();
-                    }
-                    else {
+                        fs.readFile(path.resolve(__dirname, `../../${filePath}`), (error, content) => {
+                            if (error) {
+                                if(error.code == 'ENOENT') {
+                                    console.error('404 NOT FOUND', path.resolve(__dirname, `../../client${filePath}`));
+                                    response.writeHead(404);
+                                    response.end();
+                                } else {
+                                    response.writeHead(500);
+                                    response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
+                                    response.end();
+                                }
+                            } else {
+                                response.writeHead(200, { 'Content-Type': contentType });
+                                response.end(content, 'utf-8');
+                            }
+                        });
+                    } else {
                         response.writeHead(500);
                         response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
                         response.end();

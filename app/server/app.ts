@@ -12,6 +12,7 @@ export class App implements Application {
 
     constructor(@Inject(FetcherDIToken) private fetchers: Array<Fetcher>, private staticServer: StaticServer, private client: Client, private checkFetcherOption: CheckFetcherOption) {
         client.fetchers = fetchers;
+        client.visualizersClass = isodashConf.visualizers;
     }
 
     start() {
