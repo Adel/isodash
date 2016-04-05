@@ -38,7 +38,7 @@ export class StaticServer {
             fs.readFile(path.resolve(__dirname, `../../client${filePath}`), (error, content) => {
                 if (error) {
                     if(error.code == 'ENOENT') {
-                        fs.readFile(path.resolve(__dirname, `../../${filePath}`), (error, content) => {
+                        fs.readFile(path.resolve(__dirname, `../../${filePath}`), (error, content) => {//TODO better management for shared
                             if (error) {
                                 if(error.code == 'ENOENT') {
                                     console.error('404 NOT FOUND', path.resolve(__dirname, `../../client${filePath}`));

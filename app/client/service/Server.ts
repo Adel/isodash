@@ -1,32 +1,25 @@
-import {Observable} from 'rxjs/Observable';
+//import {Observable} from 'rxjs/Observable';
+import {WebSocketSubject} from 'rxjs/observable/dom/WebSocketSubject';
+import {filter} from 'rxjs/operator/filter';
 import {Subscriber} from "rxjs/Subscriber";
 import {CommunicationEvent} from "../../shared/communication/CommunicationEvent";
+import {IsoDashInit} from "../../shared/communication/IsoDashInit";
+import {Observable} from "../../../build/app/client/rxjs/Observable";
 
 export class Server {
 
     private ws: WebSocket;
-    private eventStream: Observable<CommunicationEvent>;
+    private eventStream: WebSocketSubject<CommunicationEvent>;
 
     constructor() {
-        this.ws = new WebSocket(`ws://${location.hostname}:8080`);
-        this.eventStream = Observable.create((observer: Subscriber<CommunicationEvent>) => {
-            this.ws.addEventListener("close", (ev: CloseEvent) => {
-                observer.complete();
-                console.error('WebSocket closed!', ev);
-            });
-            this.ws.addEventListener("error", (ev: ErrorEvent) => {
-                observer.error(ev);
-                console.error('WebSocket error!', ev);
-            });
-            this.ws.addEventListener("message", (ev: MessageEvent) => {
-                console.log('WebSocket message!', ev.data);
-                observer.next(ev.data);
-                this.send({m: 'hello back'});
-            });
-        });
+        this.eventStream = WebSocketSubject.create<CommunicationEvent>(`ws://${location.hostname}:8080`);
+        this.send({m: 'hello back'});
+        this.eventStream.forEach((e:CommunicationEvent) => console.log(e), this);
+        //const obs = filter((e: CommunicationEvent)  => e.name === IsoDashInit.name);
+        //obs.forEach((e: IsoDashInit) => console.log('FILTER', e), this);
     }
 
     send(data: Object) {
-        this.ws.send(JSON.stringify(data));
+        this.eventStream.next(JSON.stringify(data));
     }
 }
