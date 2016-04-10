@@ -1,10 +1,8 @@
 //import {Observable} from 'rxjs/Observable';
 import {WebSocketSubject} from 'rxjs/observable/dom/WebSocketSubject';
-import {filter} from 'rxjs/operator/filter';
-import {Subscriber} from "rxjs/Subscriber";
-import {CommunicationEvent} from "../../shared/communication/CommunicationEvent";
-import {IsoDashInit} from "../../shared/communication/IsoDashInit";
-import {Observable} from "../../../build/app/client/rxjs/Observable";
+import {CommunicationEvent} from "../../shared/communication";
+import {ClassDefinition} from "angular2/core";
+import {Communication} from "../../shared/communication";
 
 export class Server {
 
@@ -13,13 +11,14 @@ export class Server {
 
     constructor() {
         this.eventStream = WebSocketSubject.create<CommunicationEvent>(`ws://${location.hostname}:8080`);
-        this.send({m: 'hello back'});
-        this.eventStream.forEach((e:CommunicationEvent) => console.log(e), this);
-        //const obs = filter((e: CommunicationEvent)  => e.name === IsoDashInit.name);
-        //obs.forEach((e: IsoDashInit) => console.log('FILTER', e), this);
+        this.eventStream.forEach((e:CommunicationEvent) => console.log('EVENT', e), this);
     }
 
-    send(data: Object) {
-        this.eventStream.next(JSON.stringify(data));
+    on(communication: Communication, callback: (event: CommunicationEvent) => any) {
+        this.eventStream.forEach((event: CommunicationEvent) => event instanceof communication ? callback(event) : undefined, this);
+    }
+
+    send(data: CommunicationEvent) {
+        this.eventStream.next(data);
     }
 }

@@ -1,6 +1,5 @@
-import {Visualizer, VisualizerMetaInfo, Type} from "../service/visualizer/Visualizer";
+import {Visualizer, VisualizerMetaInfo, Type} from "../visualizer/Visualizer";
 import {Component} from "angular2/core";
-import {Server} from "../service/Server";
 
 @Component({
     selector: 'test-idv',
@@ -8,8 +7,7 @@ import {Server} from "../service/Server";
 })
 export class TestIdv implements Visualizer {
 
-    constructor(private server: Server) {
-        console.log(server);
+    constructor() {
     }
 
     getMetaInfo(): VisualizerMetaInfo {
