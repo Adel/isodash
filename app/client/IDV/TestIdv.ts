@@ -29,3 +29,5 @@ export class TestIdv implements Visualizer {
     }
 
 }
+
+export const IDV = TestIdv;
