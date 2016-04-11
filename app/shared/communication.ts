@@ -6,4 +6,5 @@ import {CommunicationEvent} from './communication/CommunicationEvent';
 
 export interface Communication {
     new(...args: any[]): CommunicationEvent;
+    getName(): string;
 }

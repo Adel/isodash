@@ -39,4 +39,4 @@ export class App implements Application {
 }
 
 new DynamicFetcherLoader().start(isodashConf.fetchers);
-start(<Application>App);
+start(App);
