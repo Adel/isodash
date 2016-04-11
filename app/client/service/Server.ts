@@ -15,6 +15,7 @@ export class Server {
 
     on(communication: Communication, callback: (event: CommunicationEvent) => any) {
         this.eventStream.forEach((event: CommunicationEvent) => event.name === communication.getName() ? callback(event) : console.log('not', event.name, communication.getName()), this);
+        return this;
     }
 
     send(data: CommunicationEvent) {

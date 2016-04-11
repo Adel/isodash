@@ -1,5 +1,5 @@
   {
-    "visualizers": ["./IDV/TestIdv"],
+    "visualizers": ["./IDV/TestIdv", "./IDV/TestIdv"],
     "fetchers": ["../IDF/Test"],
     "fetchersConfiguration": [
       {
