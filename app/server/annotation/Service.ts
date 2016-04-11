@@ -3,11 +3,15 @@ import {Injector, provide, Type} from "angular2/core";
 let clazz: Array<any> = [];
 let injector: Injector;
 
+export interface staticApplication {
+    new(...args: any[]): Application;
+}
+
 export interface Application {
     start(): any;
 }
 
-export function start(application: Application) {
+export function start(application: staticApplication) {
     clazz.push(application);
     injector = Injector.resolveAndCreate(clazz);
     injector.get(application).start();

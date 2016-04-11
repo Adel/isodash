@@ -1,4 +1,3 @@
-//import {Observable} from 'rxjs/Observable';
 import {WebSocketSubject} from 'rxjs/observable/dom/WebSocketSubject';
 import {CommunicationEvent} from "../../shared/communication";
 import {ClassDefinition} from "angular2/core";
@@ -15,7 +14,7 @@ export class Server {
     }
 
     on(communication: Communication, callback: (event: CommunicationEvent) => any) {
-        this.eventStream.forEach((event: CommunicationEvent) => event instanceof communication ? callback(event) : undefined, this);
+        this.eventStream.forEach((event: CommunicationEvent) => event.name === communication.getName() ? callback(event) : console.log('not', event.name, communication.getName()), this);
     }
 
     send(data: CommunicationEvent) {
