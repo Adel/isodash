@@ -14,7 +14,7 @@ const FACTOR_SIZE_HEIGHT = 10;
 
 @Component({
     selector: 'my-app',
-    template: `<div [id]="'child-'+zone.index" *ngFor="#zone of zones" [ngStyle]="{'width': zone.width, 'height': zone.height}" style="display: inline-block"></div>`
+    templateUrl: 'app.html'//relative to app/client
 })
 export class App {
 
@@ -30,8 +30,7 @@ export class App {
             .on(IsoDashInit, (event:IsoDashInit) => {
                 console.log('on', event);
                 event.visualizers.forEach((module: string, index: number) => {
-                    var Compo = require(module).IDV;
-                    dynamicComponentLoader.loadAsRoot(Compo, `#child-${index}`, injector)
+                    dynamicComponentLoader.loadAsRoot(require(module).IDV, `#child-${index}`, injector)
                         .then((res) => {
                             console.log(res);
                         });
