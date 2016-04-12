@@ -1,8 +1,27 @@
 # isodash
-An isomorphic js dashboard framework.
 
-# Big picture
+> An isomorphic js dashboard framework.
+
 Isodash permit to build dashboards. Its based on Fetchers (to get data) and Visualizers (to display it). Both are linked with an ergonomic Angular2 web-app.
+
+# Development
+
+## Requirements
+
+* node > 4
+
+## Procedure
+
+```bash
+npm install
+npm run dev
+```
+
+Other terminal
+
+```bash
+node build/app/server/app.js
+```
 
 # Roadmap
 
@@ -11,10 +30,10 @@ Isodash permit to build dashboards. Its based on Fetchers (to get data) and Visu
 * Globale Architecture
   * [x] [Fetcher](app/server/fetcher/Fetcher.ts)
   * [x] [Fetcher example](app/server/IDF/Test.ts)
-  * [ ] Visualizer _(in progress by @manland)_
-  * [ ] Visualizer example _(in progress by @manland)_
-  * [ ] Communication _(in progress by @manland)_
-  * [ ] Configuration (with a file server side in isodash.conf.json) _(in progress by @manland)_
+  * [x] [Visualizer](app/client/visualizer/Visualizer.ts)
+  * [x] [Visualizer example](app/client/IDV/TestIdv.ts)
+  * [x] Communication [server->client](app/server/service/Client.ts) & [client->server](app/client/service/Server.ts)
+  * [x] Configuration + [check](app/server/service/CheckFetcherOption.ts) (with a file server side in [isodash.conf.json](isodash.conf.json))
    
 * Brick maker
   * [ ] Drag&Drop empty case -> open popup with visu
