@@ -78,4 +78,5 @@ gulp.task(TASK_DEV_WATCH, () => {
     gulp.watch(config.client.ts.files, [TASK_DEV_TYPESCRIPT_CLIENT]);
     gulp.watch(config.server.ts.files, [TASK_DEV_TYPESCRIPT_SERVER]);
     gulp.watch(config.client.sass.files, [TASK_DEV_SASS]);
+    gulp.watch(config.client.assets.files, [TASK_DEV_ASSETS_CLIENT]);
 });

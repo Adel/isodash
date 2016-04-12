@@ -25,8 +25,7 @@ export class App implements Application {
             if(fetcher) {
                 const errorsFromConfig = this.checkFetcherOption.check(fetcher, fetcherConf);
                 if(errorsFromConfig.length === 0) {
-                    //TODO decomment me
-                    //fetcher.start(fetcherConf.options);
+                    fetcher.start(fetcherConf.options);
                 } else {
                     errors.push(...errorsFromConfig);
                 }

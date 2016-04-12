@@ -6,14 +6,16 @@ import {Component} from "angular2/core";
     templateUrl: 'IDV/TestIdv/TestIdv.html',
     styleUrls: ['IDV/TestIdv/TestIdv.css']
 })
-export class TestIdv implements Visualizer {
+export class IDV implements Visualizer {
+
+    _data: any = {value: 156};
 
     constructor() {
     }
 
     getMetaInfo(): VisualizerMetaInfo {
         return {
-            name: '',
+            name: 'TestIdv',
             description: '',
             imageUrl: '',
             options: {},
@@ -29,6 +31,8 @@ export class TestIdv implements Visualizer {
 
     }
 
-}
+    data(data: any) {
+        this._data = data;
+    }
 
-export const IDV = TestIdv;
+}

@@ -10,11 +10,14 @@ export class Server {
 
     constructor() {
         this.eventStream = WebSocketSubject.create<CommunicationEvent>(`ws://${location.hostname}:8080`);
-        this.eventStream.forEach((e:CommunicationEvent) => console.log('EVENT', e), this);
     }
 
     on(communication: Communication, callback: (event: CommunicationEvent) => any) {
-        this.eventStream.forEach((event: CommunicationEvent) => event.name === communication.getName() ? callback(event) : console.log('not', event.name, communication.getName()), this);
+        this.eventStream.subscribe((event: CommunicationEvent) => {
+            if(event.name === communication.getName()) {
+                callback(event)
+            }
+        });
         return this;
     }
 

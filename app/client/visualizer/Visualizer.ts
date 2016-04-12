@@ -8,4 +8,5 @@ export interface VisualizerMetaInfo extends PluginMetaInfo {
 export interface Visualizer {
     getMetaInfo(): VisualizerMetaInfo;
     start(filledOptions: any): any;
+    data(data: any): void;
 }
