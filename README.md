@@ -56,7 +56,7 @@ Isodash permit to build dashboards. Its based on Fetchers (to get data) and Visu
   * [ ] Coffee machine _(reserved by sam)_
   * [ ] Service rest (can be used internally to get plots, products, cultural-practices...)
   * [ ] Jenkins build status
-  * [ ] Trade (cac40) of soybean, corn, wheat, coffee...
+  * [ ] [Trade (cac40) of soybean, corn, wheat, coffee...](https://github.com/manland/isodash/issues/1)
 
 ## Version 3
 
