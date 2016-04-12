@@ -3,7 +3,7 @@ import {Component, DynamicComponentLoader, Injector} from "angular2/core";
 import {Server} from "./service";
 import {IsoDashInit, Data} from "../shared/communication";
 
-require('./IDV/TestIdv');//TODO find a way to delete it
+require('./IDV/TestIdv/TestIdv');//TODO find a way to delete it
 
 const injector = Injector.resolveAndCreate([Server]);
 

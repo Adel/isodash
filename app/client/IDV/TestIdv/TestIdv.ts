@@ -1,9 +1,10 @@
-import {Visualizer, VisualizerMetaInfo, Type} from "../visualizer/Visualizer";
+import {Visualizer, VisualizerMetaInfo, Type} from "../../visualizer/Visualizer";
 import {Component} from "angular2/core";
 
 @Component({
     selector: 'test-idv',
-    templateUrl: 'IDV/TestIdv.html'
+    templateUrl: 'IDV/TestIdv/TestIdv.html',
+    styleUrls: ['IDV/TestIdv/TestIdv.css']
 })
 export class TestIdv implements Visualizer {
 

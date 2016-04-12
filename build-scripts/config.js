@@ -3,7 +3,7 @@ module.exports.client = {
         files: [
             './app/client/**/*.html'
         ],
-        dest: './build/app/client/'
+        dest: './build/client/'
     },
     vendors: [
         {
@@ -13,7 +13,7 @@ module.exports.client = {
                 './node_modules/systemjs/dist/system.js.map',
                 './node_modules/angular2/bundles/angular2-polyfills.js'
             ],
-            dest: './build/app/client/'
+            dest: './build/client/'
         }, {
             base: './node_modules',
             files: [
@@ -25,13 +25,20 @@ module.exports.client = {
                 './node_modules/angular2/platform/**/*.js',
                 './node_modules/rxjs/**/*'
             ],
-            dest: './build/app/client/'
+            dest: './build/client/'
         }
     ],
     ts: {
         files: [
             './app/shared/**/*.ts',
             './app/client/**/*.ts'
+        ],
+        dest: './build/'
+    },
+    sass: {
+        base: './app/',
+        files: [
+            './app/client/**/*.scss'
         ],
         dest: './build/'
     }

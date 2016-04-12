@@ -4,7 +4,7 @@ import {Inject, Injectable} from "angular2/core";
 import {Application, start} from "./annotation/Service";
 import {Fetcher, FetcherDIToken, FetcherFromConfig} from "./fetcher/Fetcher";
 import {StaticServer, Client, DynamicFetcherLoader} from "./service";
-import * as isodashConf from "../../../isodash.conf.json";
+import * as isodashConf from "../../isodash.conf.json";
 import {CheckFetcherOption} from "./service/CheckFetcherOption";
 
 @Injectable()
