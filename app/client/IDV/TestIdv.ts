@@ -3,7 +3,7 @@ import {Component} from "angular2/core";
 
 @Component({
     selector: 'test-idv',
-    template: `<div style="background: red; width: 50px; height: 50px; display: inline-block"></div>`
+    templateUrl: 'IDV/TestIdv.html'
 })
 export class TestIdv implements Visualizer {
 
